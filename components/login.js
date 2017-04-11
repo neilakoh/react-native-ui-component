@@ -53,7 +53,12 @@ export default class Login extends Component {
     loginBtnTextColor,
     loginBtnBorderColor,
     event,
+    inputSeparator,
+    usernameIconBgColor,
+    passwordIconBgColor,
+    logoFilename,
   ) {
+    let separatorSize = inputSeparator === 'full' ? 100 : inputSeparator === 'mid' ? 50 : inputSeparator === 'small' ? 35 : 0;
     return (
       <Image source={{uri: backgroundImageFilename}} style={{
         flex: 1,
@@ -66,13 +71,15 @@ export default class Login extends Component {
           alignItems: 'center',
         }}>
           {
-            this.logo()
+            this.logo(logoFilename)
           }
           {
             this.loginUsernameUI(
               usernameIconFilename,
               loginBorderColor,
               loginBgColor,
+              separatorSize,
+              usernameIconBgColor
             )
           }
           {
@@ -80,6 +87,8 @@ export default class Login extends Component {
               passwordIconFilename,
               passwordBorderColor,
               passwordBgColor,
+              separatorSize,
+              passwordIconBgColor
             )
           }
           {
@@ -95,7 +104,7 @@ export default class Login extends Component {
     )
   }
 
-  logo() {
+  logo(logoFilename) {
     return (
       <View style={{
         width: ComponentFixer.getPercentage(width, 100),
@@ -103,7 +112,7 @@ export default class Login extends Component {
         justifyContent: 'center',
         alignItems: 'center',
       }} ref='logoWrapper'>
-        <Image source={{uri: 'logo'}} style={{
+        <Image source={{uri: logoFilename}} style={{
           width: ComponentFixer.getPercentage(width, 50),
           height: ComponentFixer.getPercentage(height, 25),
           resizeMode: 'contain',
@@ -116,7 +125,10 @@ export default class Login extends Component {
     usernameIconFilename,
     loginBorderColor,
     loginBgColor,
+    separatorSize,
+    usernameIconBgColor,
   ) {
+
     return (
       <View ref='username' style={{
         width: ComponentFixer.getPercentage(width, 65),
@@ -130,10 +142,11 @@ export default class Login extends Component {
           left: 0,
           position: 'absolute',
           width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25),
-          height: ComponentFixer.getPercentage(height, 8),
+          height: ComponentFixer.getPercentage(ComponentFixer.getPercentage(height, 8), 95),
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
+          backgroundColor: usernameIconBgColor,
         }}>
           <Image source={{uri: usernameIconFilename}} ref='uicon' style={{
             resizeMode: 'contain',
@@ -143,7 +156,7 @@ export default class Login extends Component {
           }}></Image>
           <View ref='unameSeparator' style={{
             width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25),
-            height: ComponentFixer.getPercentage(height, 4),
+            height: ComponentFixer.getPercentage(ComponentFixer.getPercentage(height, 8), separatorSize),
             position: 'absolute',
             zIndex: 1,
             borderRightWidth: 1,
@@ -174,6 +187,8 @@ export default class Login extends Component {
     passwordIconFilename,
     passwordBorderColor,
     passwordBgColor,
+    separatorSize,
+    passwordIconBgColor
   ) {
     return (
       <View ref='password' style={{
@@ -189,10 +204,11 @@ export default class Login extends Component {
           left: 0,
           position: 'absolute',
           width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25),
-          height: ComponentFixer.getPercentage(height, 8),
+          height: ComponentFixer.getPercentage(ComponentFixer.getPercentage(height, 8), 95),
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
+          backgroundColor: passwordIconBgColor,
         }}>
           <Image source={{uri: passwordIconFilename}} ref='picon' style={{
             resizeMode: 'contain',
@@ -202,7 +218,7 @@ export default class Login extends Component {
           }}></Image>
           <View ref='passSeparator' style={{
             width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25),
-            height: ComponentFixer.getPercentage(height, 4),
+            height: ComponentFixer.getPercentage(ComponentFixer.getPercentage(height, 8), separatorSize),
             position: 'absolute',
             zIndex: 1,
             borderRightWidth: 1,
@@ -271,7 +287,11 @@ export default class Login extends Component {
       loginBtnColor,
       loginBtnTextColor,
       loginBtnBorderColor,
-      event
+      event,
+      inputSeparator,
+      usernameIconBgColor,
+      passwordIconBgColor,
+      logoFilename,
     } = this.props;
     return (
       type === 'graphical' ? this.graphical(
@@ -286,6 +306,10 @@ export default class Login extends Component {
         loginBtnTextColor,
         loginBtnBorderColor,
         event,
+        inputSeparator,
+        usernameIconBgColor,
+        passwordIconBgColor,
+        logoFilename,
       ) : this.standard()
     )
   }
