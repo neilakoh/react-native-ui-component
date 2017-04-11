@@ -22,7 +22,7 @@ export default class Login extends Component {
   constructor(props, context) {
     super(props, context);
     this.standard = this.standard.bind(this);
-    this.image = this.image.bind(this);
+    this.graphical = this.graphical.bind(this);
     this.loginUsernameUI = this.loginUsernameUI.bind(this);
     this.loginPasswordUI = this.loginPasswordUI.bind(this);
     this.loginButton = this.loginButton.bind(this);
@@ -37,9 +37,9 @@ export default class Login extends Component {
     )
   }
 
-  image(imageFilename, passwordIconFilename, usernameIconFilename) {
+  graphical(backgroundImageFilename, passwordIconFilename, usernameIconFilename) {
     return (
-      <Image source={{uri: imageFilename}} style={styles.imageType}>
+      <Image source={{uri: backgroundImageFilename}} style={styles.imageType}>
         <View ref='loginUIWrapper' style={styles.loginUIWrapper}>
           {
             this.logo()
@@ -105,9 +105,9 @@ export default class Login extends Component {
   }
 
   render() {
-    const {type, imageFilename, passwordIconFilename, usernameIconFilename} = this.props;
+    const {type, backgroundImageFilename, passwordIconFilename, usernameIconFilename} = this.props;
     return (
-      type === 'image' ? this.image(imageFilename, passwordIconFilename, usernameIconFilename) : this.standard()
+      type === 'graphical' ? this.graphical(backgroundImageFilename, passwordIconFilename, usernameIconFilename) : this.standard()
     )
   }
 }
