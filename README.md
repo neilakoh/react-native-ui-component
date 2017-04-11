@@ -22,6 +22,14 @@ export default class experiment extends Component {
         backgroundImageFilename='background'
         passwordIconFilename='pass'
         usernameIconFilename='user'
+        loginBorderColor='#663399'
+        passwordBorderColor='#daa520'
+        loginBgColor='rgba(0, 0, 0, 0.8)'
+        passwordBgColor='rgba(0, 0, 0, 0.8)'
+        loginBtnColor='#daa520'
+        loginBtnTextColor='rgba(0,0,0,0.8)'
+        loginBtnBorderColor='rgba(0, 0, 0, 0.8)'
+        event={()=>{this.test('testing')}}
       />
     );
   }
