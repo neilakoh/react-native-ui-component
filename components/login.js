@@ -24,6 +24,9 @@ export default class Login extends Component {
     this.standard = this.standard.bind(this);
     this.image = this.image.bind(this);
     this.loginUsernameUI = this.loginUsernameUI.bind(this);
+    this.loginPasswordUI = this.loginPasswordUI.bind(this);
+    this.loginButton = this.loginButton.bind(this);
+    this.logo = this.logo.bind(this);
   }
 
   standard() {
@@ -34,15 +37,18 @@ export default class Login extends Component {
     )
   }
 
-  image(imageFilename) {
+  image(imageFilename, passwordIconFilename, usernameIconFilename) {
     return (
       <Image source={{uri: imageFilename}} style={styles.imageType}>
-        <View ref='loginUIWrapper'>
+        <View ref='loginUIWrapper' style={styles.loginUIWrapper}>
           {
-            this.loginUsernameUI()
+            this.logo()
           }
           {
-            this.loginPasswordUI()
+            this.loginUsernameUI(usernameIconFilename)
+          }
+          {
+            this.loginPasswordUI(passwordIconFilename)
           }
           {
             this.loginButton()
@@ -52,11 +58,19 @@ export default class Login extends Component {
     )
   }
 
-  loginUsernameUI() {
+  logo() {
+    return (
+      <View style={styles.logoWrapper} ref='logoWrapper'>
+        <Image source={{uri: 'logo'}} style={styles.logo} ref='logo'/>
+      </View>
+    )
+  }
+
+  loginUsernameUI(usernameIconFilename) {
     return (
       <View ref='username' style={styles.usernameUI}>
         <View ref='usernameIcon' style={styles.usernameIcon}>
-          <Image source={{uri: 'user'}} ref='uicon' style={styles.uicon}></Image>
+          <Image source={{uri: usernameIconFilename}} ref='uicon' style={styles.uicon}></Image>
           <View ref='unameSeparator' style={styles.unameSeparator}></View>
         </View>
         <View ref='usernameInput' style={styles.usernameInput}>
@@ -66,11 +80,11 @@ export default class Login extends Component {
     )
   }
 
-  loginPasswordUI() {
+  loginPasswordUI(passwordIconFilename) {
     return (
       <View ref='password' style={styles.passwordUI}>
         <View ref='passwordIcon' style={styles.passwordIcon}>
-          <Image source={{uri: 'pass'}} ref='picon' style={styles.picon}></Image>
+          <Image source={{uri: passwordIconFilename}} ref='picon' style={styles.picon}></Image>
           <View ref='passSeparator' style={styles.passSeparator}></View>
         </View>
         <View ref='passwordInput' style={styles.passwordInput}>
@@ -91,9 +105,9 @@ export default class Login extends Component {
   }
 
   render() {
-    const {type, imageFilename} = this.props;
+    const {type, imageFilename, passwordIconFilename, usernameIconFilename} = this.props;
     return (
-      type === 'image' ? this.image(imageFilename) : this.standard()
+      type === 'image' ? this.image(imageFilename, passwordIconFilename, usernameIconFilename) : this.standard()
     )
   }
 }
@@ -114,9 +128,9 @@ const styles = StyleSheet.create({
   usernameUI: {
     width: ComponentFixer.getPercentage(width, 65),
     height: ComponentFixer.getPercentage(height, 8),
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
     flexDirection: 'row',
-    borderColor: 'rgba(0, 0, 0, 0.8)',
+    borderColor: '#daa520',
     borderWidth: 1,
   },
   usernameIcon: {
@@ -155,15 +169,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 1,
     borderRightWidth: 1,
-    borderRightColor: '#696969',
+    borderRightColor: '#daa520',
   },
   //PASSWORD STYLE
   passwordUI: {
     width: ComponentFixer.getPercentage(width, 65),
     height: ComponentFixer.getPercentage(height, 8),
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
     flexDirection: 'row',
-    borderColor: 'rgba(0, 0, 0, 0.8)',
+    borderColor: '#daa520',
     borderWidth: 1,
     marginTop: 5,
   },
@@ -203,21 +217,38 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 1,
     borderRightWidth: 1,
-    borderRightColor: '#696969',
+    borderRightColor: '#daa520',
   },
   //LOGIN BUTTON
   loginButton: {
     width: ComponentFixer.getPercentage(width, 65),
     height: ComponentFixer.getPercentage(height, 8),
     marginTop: 5,
-    backgroundColor: '#696969',
+    backgroundColor: '#daa520',
     justifyContent: 'center',
     alignItems: 'center',
+    borderColor: 'rgba(0, 0, 0, 0.8)',
+    borderWidth: 1,
   },
   loginText: {
     fontSize: 18,
     textAlign: 'center',
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: 'rgba(0,0,0,0.8)',
   },
+  logoWrapper: {
+    width: ComponentFixer.getPercentage(width, 100),
+    height: ComponentFixer.getPercentage(height, 25),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    width: ComponentFixer.getPercentage(width, 50),
+    height: ComponentFixer.getPercentage(height, 25),
+    resizeMode: 'contain',
+  },
+  loginUIWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
