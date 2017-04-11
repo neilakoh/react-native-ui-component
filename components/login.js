@@ -31,27 +31,64 @@ export default class Login extends Component {
 
   standard() {
     return (
-      <View style={styles.container}>
+      <View style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
         <Text>Standard</Text>
       </View>
     )
   }
 
-  graphical(backgroundImageFilename, passwordIconFilename, usernameIconFilename) {
+  graphical(
+    backgroundImageFilename,
+    passwordIconFilename,
+    usernameIconFilename,
+    loginBorderColor,
+    passwordBorderColor,
+    loginBgColor,
+    passwordBgColor,
+    loginBtnColor,
+    loginBtnTextColor,
+    loginBtnBorderColor,
+    event,
+  ) {
     return (
-      <Image source={{uri: backgroundImageFilename}} style={styles.imageType}>
-        <View ref='loginUIWrapper' style={styles.loginUIWrapper}>
+      <Image source={{uri: backgroundImageFilename}} style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        resizeMode: 'cover',
+      }}>
+        <View ref='loginUIWrapper' style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
           {
             this.logo()
           }
           {
-            this.loginUsernameUI(usernameIconFilename)
+            this.loginUsernameUI(
+              usernameIconFilename,
+              loginBorderColor,
+              loginBgColor,
+            )
           }
           {
-            this.loginPasswordUI(passwordIconFilename)
+            this.loginPasswordUI(
+              passwordIconFilename,
+              passwordBorderColor,
+              passwordBgColor,
+            )
           }
           {
-            this.loginButton()
+            this.loginButton(
+              loginBtnColor,
+              loginBtnTextColor,
+              loginBtnBorderColor,
+              event,
+            )
           }
         </View>
       </Image>
@@ -60,195 +97,196 @@ export default class Login extends Component {
 
   logo() {
     return (
-      <View style={styles.logoWrapper} ref='logoWrapper'>
-        <Image source={{uri: 'logo'}} style={styles.logo} ref='logo'/>
+      <View style={{
+        width: ComponentFixer.getPercentage(width, 100),
+        height: ComponentFixer.getPercentage(height, 25),
+        justifyContent: 'center',
+        alignItems: 'center',
+      }} ref='logoWrapper'>
+        <Image source={{uri: 'logo'}} style={{
+          width: ComponentFixer.getPercentage(width, 50),
+          height: ComponentFixer.getPercentage(height, 25),
+          resizeMode: 'contain',
+        }} ref='logo'/>
       </View>
     )
   }
 
-  loginUsernameUI(usernameIconFilename) {
+  loginUsernameUI(
+    usernameIconFilename,
+    loginBorderColor,
+    loginBgColor,
+  ) {
     return (
-      <View ref='username' style={styles.usernameUI}>
-        <View ref='usernameIcon' style={styles.usernameIcon}>
-          <Image source={{uri: usernameIconFilename}} ref='uicon' style={styles.uicon}></Image>
-          <View ref='unameSeparator' style={styles.unameSeparator}></View>
+      <View ref='username' style={{
+        width: ComponentFixer.getPercentage(width, 65),
+        height: ComponentFixer.getPercentage(height, 8),
+        backgroundColor: loginBgColor,
+        flexDirection: 'row',
+        borderColor: loginBorderColor,
+        borderWidth: 1,
+      }}>
+        <View ref='usernameIcon' style={{
+          left: 0,
+          position: 'absolute',
+          width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25),
+          height: ComponentFixer.getPercentage(height, 8),
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <Image source={{uri: usernameIconFilename}} ref='uicon' style={{
+            resizeMode: 'contain',
+            height: ComponentFixer.getPercentage(ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25), 50),
+            width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25), 50),
+            zIndex: 5,
+          }}></Image>
+          <View ref='unameSeparator' style={{
+            width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25),
+            height: ComponentFixer.getPercentage(height, 4),
+            position: 'absolute',
+            zIndex: 1,
+            borderRightWidth: 1,
+            borderRightColor: loginBorderColor,
+          }}></View>
         </View>
-        <View ref='usernameInput' style={styles.usernameInput}>
-          <TextInput ref='uinput' style={styles.uinput} placeholder='Username' underlineColorAndroid='transparent' placeholderTextColor='#696969' />
+        <View ref='usernameInput' style={{
+          right: 0,
+          position: 'absolute',
+          width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 75),
+          height: ComponentFixer.getPercentage(height, 8),
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <TextInput ref='uinput' style={{
+            width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 72),
+            height: ComponentFixer.getPercentage(height, 7),
+            fontSize: 16,
+            color: '#ffffff',
+          }} placeholder='Username' underlineColorAndroid='transparent' placeholderTextColor='#696969' />
         </View>
       </View>
     )
   }
 
-  loginPasswordUI(passwordIconFilename) {
+  loginPasswordUI(
+    passwordIconFilename,
+    passwordBorderColor,
+    passwordBgColor,
+  ) {
     return (
-      <View ref='password' style={styles.passwordUI}>
-        <View ref='passwordIcon' style={styles.passwordIcon}>
-          <Image source={{uri: passwordIconFilename}} ref='picon' style={styles.picon}></Image>
-          <View ref='passSeparator' style={styles.passSeparator}></View>
+      <View ref='password' style={{
+        width: ComponentFixer.getPercentage(width, 65),
+        height: ComponentFixer.getPercentage(height, 8),
+        backgroundColor: passwordBgColor,
+        flexDirection: 'row',
+        borderColor: passwordBorderColor,
+        borderWidth: 1,
+        marginTop: 5,
+      }}>
+        <View ref='passwordIcon' style={{
+          left: 0,
+          position: 'absolute',
+          width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25),
+          height: ComponentFixer.getPercentage(height, 8),
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <Image source={{uri: passwordIconFilename}} ref='picon' style={{
+            resizeMode: 'contain',
+            height: ComponentFixer.getPercentage(ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25), 50),
+            width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25), 50),
+            zIndex: 5,
+          }}></Image>
+          <View ref='passSeparator' style={{
+            width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25),
+            height: ComponentFixer.getPercentage(height, 4),
+            position: 'absolute',
+            zIndex: 1,
+            borderRightWidth: 1,
+            borderRightColor: passwordBorderColor,
+          }}></View>
         </View>
-        <View ref='passwordInput' style={styles.passwordInput}>
-          <TextInput ref='pinput' style={styles.uinput} placeholder='Password' underlineColorAndroid='transparent' placeholderTextColor='#696969' secureTextEntry={true}/>
+        <View ref='passwordInput' style={{
+          right: 0,
+          position: 'absolute',
+          width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 75),
+          height: ComponentFixer.getPercentage(height, 8),
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <TextInput ref='pinput' style={{
+            width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 72),
+            height: ComponentFixer.getPercentage(height, 7),
+            fontSize: 16,
+            color: '#ffffff',
+          }} placeholder='Password' underlineColorAndroid='transparent' placeholderTextColor='#696969' secureTextEntry={true}/>
         </View>
       </View>
     )
   }
 
-  loginButton() {
+  loginButton(
+    loginBtnColor,
+    loginBtnTextColor,
+    loginBtnBorderColor,
+    event,
+  ) {
     return (
-      <TouchableHighlight ref='loginButton' style={styles.loginButton}>
+      <TouchableHighlight ref='loginButton' onPress={event} style={{
+        width: ComponentFixer.getPercentage(width, 65),
+        height: ComponentFixer.getPercentage(height, 8),
+        marginTop: 5,
+        backgroundColor: loginBtnColor,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: loginBtnBorderColor,
+        borderWidth: 1,
+      }}>
         <View>
-          <Text ref='loginText' style={styles.loginText}>LOGIN</Text>
+          <Text ref='loginText' style={{
+            fontSize: 18,
+            textAlign: 'center',
+            fontWeight: 'bold',
+            color: loginBtnTextColor,
+          }}>LOGIN</Text>
         </View>
       </TouchableHighlight>
     )
   }
 
   render() {
-    const {type, backgroundImageFilename, passwordIconFilename, usernameIconFilename} = this.props;
+    const {
+      type,
+      backgroundImageFilename,
+      passwordIconFilename,
+      usernameIconFilename,
+      loginBorderColor,
+      passwordBorderColor,
+      loginBgColor,
+      passwordBgColor,
+      loginBtnColor,
+      loginBtnTextColor,
+      loginBtnBorderColor,
+      event
+    } = this.props;
     return (
-      type === 'graphical' ? this.graphical(backgroundImageFilename, passwordIconFilename, usernameIconFilename) : this.standard()
+      type === 'graphical' ? this.graphical(
+        backgroundImageFilename,
+        passwordIconFilename,
+        usernameIconFilename,
+        loginBorderColor,
+        passwordBorderColor,
+        loginBgColor,
+        passwordBgColor,
+        loginBtnColor,
+        loginBtnTextColor,
+        loginBtnBorderColor,
+        event,
+      ) : this.standard()
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  imageType: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    resizeMode: 'cover',
-  },
-  //USERNAME STYLE
-  usernameUI: {
-    width: ComponentFixer.getPercentage(width, 65),
-    height: ComponentFixer.getPercentage(height, 8),
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    flexDirection: 'row',
-    borderColor: '#daa520',
-    borderWidth: 1,
-  },
-  usernameIcon: {
-    left: 0,
-    position: 'absolute',
-    width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25),
-    height: ComponentFixer.getPercentage(height, 8),
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  usernameInput: {
-    right: 0,
-    position: 'absolute',
-    width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 75),
-    height: ComponentFixer.getPercentage(height, 8),
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  uicon: {
-    resizeMode: 'contain',
-    height: ComponentFixer.getPercentage(ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25), 50),
-    width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25), 50),
-    zIndex: 5,
-  },
-  uinput: {
-    width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 72),
-    height: ComponentFixer.getPercentage(height, 7),
-    fontSize: 16,
-    color: '#ffffff',
-  },
-  unameSeparator: {
-    width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25),
-    height: ComponentFixer.getPercentage(height, 4),
-    position: 'absolute',
-    zIndex: 1,
-    borderRightWidth: 1,
-    borderRightColor: '#daa520',
-  },
-  //PASSWORD STYLE
-  passwordUI: {
-    width: ComponentFixer.getPercentage(width, 65),
-    height: ComponentFixer.getPercentage(height, 8),
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    flexDirection: 'row',
-    borderColor: '#daa520',
-    borderWidth: 1,
-    marginTop: 5,
-  },
-  passwordIcon: {
-    left: 0,
-    position: 'absolute',
-    width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25),
-    height: ComponentFixer.getPercentage(height, 8),
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  passwordInput: {
-    right: 0,
-    position: 'absolute',
-    width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 75),
-    height: ComponentFixer.getPercentage(height, 8),
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  picon: {
-    resizeMode: 'contain',
-    height: ComponentFixer.getPercentage(ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25), 50),
-    width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25), 50),
-    zIndex: 5,
-  },
-  pinput: {
-    width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 72),
-    height: ComponentFixer.getPercentage(height, 7),
-    fontSize: 16,
-    color: '#ffffff',
-  },
-  passSeparator: {
-    width: ComponentFixer.getPercentage(ComponentFixer.getPercentage(width, 65), 25),
-    height: ComponentFixer.getPercentage(height, 4),
-    position: 'absolute',
-    zIndex: 1,
-    borderRightWidth: 1,
-    borderRightColor: '#daa520',
-  },
-  //LOGIN BUTTON
-  loginButton: {
-    width: ComponentFixer.getPercentage(width, 65),
-    height: ComponentFixer.getPercentage(height, 8),
-    marginTop: 5,
-    backgroundColor: '#daa520',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: 'rgba(0, 0, 0, 0.8)',
-    borderWidth: 1,
-  },
-  loginText: {
-    fontSize: 18,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: 'rgba(0,0,0,0.8)',
-  },
-  logoWrapper: {
-    width: ComponentFixer.getPercentage(width, 100),
-    height: ComponentFixer.getPercentage(height, 25),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logo: {
-    width: ComponentFixer.getPercentage(width, 50),
-    height: ComponentFixer.getPercentage(height, 25),
-    resizeMode: 'contain',
-  },
-  loginUIWrapper: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-});
